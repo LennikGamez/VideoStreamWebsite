@@ -1,0 +1,33 @@
+body{
+    background-color: rgb(34, 34, 34);
+    margin: 0;
+}
+
+nav{
+    display: grid;
+    place-items: center;
+}
+
+#search-bar{
+    width: 95%;
+    margin: 15px;
+    padding: 5px;
+    
+    background-color: darkgray;
+    border-style: none;
+    border-radius: 5px;
+    
+    outline: none;
+
+    margin-bottom: 30px;
+
+}
+
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 30px;
+    flex-wrap: wrap;
+}

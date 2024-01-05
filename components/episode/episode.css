@@ -1,0 +1,34 @@
+
+.wrapper{
+    color: black;
+    margin: 10px;
+    display: grid;
+    place-items: center;
+    grid-template-columns: 0.5fr 1fr 2fr;
+
+    background-color: gray;
+    padding: 10px;
+    border-radius: 8px;
+    
+}
+
+.wrapper:hover{
+    background-color: rgb(84, 84, 84);
+    cursor: pointer;
+}
+
+.index{
+    font-size: larger;
+    font-weight: 900;
+}
+
+.name{
+    font-weight: 900;
+}
+
+.description{
+    font-weight: 700;
+    min-width: 100px;
+    
+    place-self: start;
+}
