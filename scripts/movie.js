@@ -8,6 +8,7 @@ const title = document.getElementById('title');
 const length = document.getElementById('duration');
 const descr = document.getElementById('description');
 const versions = document.getElementById('version-btn');
+const play_btn = document.getElementById('play-btn');
 
 
 const queryString = window.location.search;
@@ -75,3 +76,4 @@ function addVersions(data){
 
 
 loadData();
+play_btn.addEventListener('click', play);

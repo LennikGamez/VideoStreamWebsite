@@ -6,6 +6,7 @@ const urlParams = new URLSearchParams(queryString);
 const poster = document.getElementById('poster');
 const title = document.getElementById('title');
 const descr = document.getElementById('description');
+const play_btn = document.getElementById('play-btn');
 
 
 
@@ -75,3 +76,4 @@ function setBasicInformation(json){
 
 
 loadData();
+play_btn.addEventListener('click', play);
