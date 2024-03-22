@@ -1,5 +1,4 @@
-
-const server = "http://192.168.178.83:8000";
+import {server} from "../scripts/serverip.js";
 
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);

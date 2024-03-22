@@ -1,5 +1,5 @@
+import {server} from "../scripts/serverip.js";
 
-const server = "http://192.168.178.83:8000";
 const main = document.getElementsByTagName('main')[0];
 
 

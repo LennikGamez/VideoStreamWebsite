@@ -1,4 +1,5 @@
-const server = "http://192.168.178.83:8000";
+import {server} from "../scripts/serverip.js";
+
 
 
 
