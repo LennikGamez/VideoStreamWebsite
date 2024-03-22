@@ -1,5 +1,4 @@
-
-const server = "http://192.168.178.83:8000";
+import {server} from "../scripts/serverip.js";
 
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
@@ -7,6 +6,7 @@ const urlParams = new URLSearchParams(queryString);
 const poster = document.getElementById('poster');
 const title = document.getElementById('title');
 const descr = document.getElementById('description');
+const play_btn = document.getElementById('play-btn');
 
 
 
@@ -76,3 +76,4 @@ function setBasicInformation(json){
 
 
 loadData();
+play_btn.addEventListener('click', play);
