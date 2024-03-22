@@ -15,10 +15,6 @@ function play(){
 
 }
 
-function back(){
-    window.history.go(-1);
-}
-
 
 
 

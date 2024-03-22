@@ -13,21 +13,6 @@ button:hover{
 }
 
 
-#exit{
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    width: 35px;
-
-    padding: 4px;
-
-    color: white;
-
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 20px;
-    border-style: none;
-}
-
 #poster{
     width: 100%;
 }

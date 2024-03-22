@@ -21,10 +21,6 @@ function play(){
     window.location.href = "../views/player.html"+"?media="+media+"&v="+versions.value;
 }
 
-function back(){
-    window.history.go(-1);
-}
-
 
 
 // get details about movie

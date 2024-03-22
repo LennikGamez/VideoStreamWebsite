@@ -12,11 +12,14 @@
     </style>
 
     <script type="module" src="../scripts/player.js" defer></script>
+    <script type="module" src="../components/back_button/back_btn.js" defer></script>
 </head>
-<body>
-    <video controls autoplay>
+<body style="display: flex; justify-content: center;">
+    <video controls autoplay style="padding: 30px">
         <source id="source" src="">
     </video>
+
+    <back-btn></back-btn>
 </body>
 
 </html>
