@@ -35,10 +35,18 @@ img{
 
 }
 
+.ontop:hover + h4{
+    font-size: 1.85rem;
+}
+
 
 h4{
     color: white;
     position: absolute;
     bottom: 0;
     padding: 5px;
+    margin: 10px;
+    font-size: 1.5rem;
+    pointer-events: none;
+    transition: font-size 0.2s;
 }
