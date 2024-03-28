@@ -1,3 +1,4 @@
+html{height: 100%;}
 body{
     color: white;
     margin: 0;
@@ -13,9 +14,9 @@ button:hover{
 }
 
 
-#poster{
+/* #poster{
     width: 100%;
-}
+} */
 
 #title{
     margin: 5px;
@@ -86,4 +87,57 @@ button:hover{
     place-items: center;
 }
 
+/* big */
+@media only screen and (min-width: 1100px) {
+    body{
+        display: grid;
+        height: 100%;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+        place-items: center;
+        column-gap: 10px;
+    }
+    #poster{
+        max-width: 100%;
+        width: 100%;
+        object-fit: contain;
+        grid-column-start: 1;;
+    }
+    #details{
+        width: 95%;
+        grid-column-start: 2;
+        text-align: center;
+    }
+    #buttons{
+        width: 100%;
+    }
 
+    .btn{
+        width: 75%;
+    }
+}
+
+/* small */
+@media not  screen and (min-width: 1100px) {
+    body{
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        place-items: center;
+        column-gap: 10px;
+    }
+
+    #poster{
+        width: 100%;
+    }
+
+    #details{
+        width: 100%;
+        margin-top: 20px;
+        place-self: start;
+        display: grid;
+    }
+    #episodes{
+        place-self: center;
+    }
+}
