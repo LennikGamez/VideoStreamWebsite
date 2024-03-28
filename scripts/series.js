@@ -67,6 +67,7 @@ function setBasicInformation(json){
     const data = json[media];
     poster.src = server+"/poster/"+media;
     title.innerHTML = data['name'];
+    document.title = data['name'];
     descr.innerHTML = data['description'];
 }
 

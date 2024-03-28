@@ -48,6 +48,7 @@ function handleData(json){
     poster.src = server+"/poster/"+media;
     title.innerHTML = data['name'];
     length.innerHTML = data['length'];
+    document.title = data['name'];
     descr.innerHTML = data['description'];
     
     addVersions(data)
