@@ -7,5 +7,8 @@ body{
 }
 
 video{
+    width: 80%;
+}
+.fullscreen{
     width: 100%;
 }

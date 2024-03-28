@@ -11,6 +11,8 @@ const version = urlParams.get('v');
 
 const video = document.querySelector('video');
 
+let fullscreenState = false;
+
 
 function fetchSubtitles(){
     fetch(server+"/subtitles/"+media)
@@ -46,6 +48,7 @@ function loadSubtitleTracks(subtitles){
 
 
 
+
 window.addEventListener('load', (event) => {
     
     fetchSubtitles();
@@ -57,7 +60,28 @@ window.addEventListener('load', (event) => {
     }
     
     document.querySelector('video').load();
+
+    document.getElementById('fullscreen').addEventListener('click', (event) => {
+            toggleFullscreenView();
+    })
+
+    document.addEventListener('keypress', (event) => {
+        if (event.key === '0'){
+            toggleFullscreenView();
+        }
+    })
+    
+
 })
+
+function toggleFullscreenView(){
+    fullscreenState = !fullscreenState;
+    if (fullscreenState){
+        video.classList.add('fullscreen');
+    }else{
+        video.classList.remove('fullscreen');
+    }
+}
 
 
 
