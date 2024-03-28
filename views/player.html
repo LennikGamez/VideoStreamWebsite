@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/player.css">
     <title>Player</title>
 
     <style>
@@ -14,12 +15,13 @@
     <script type="module" src="../scripts/player.js" defer></script>
     <script type="module" src="../components/back_button/back_btn.js" defer></script>
 </head>
-<body style="display: flex; justify-content: center;">
-    <video controls autoplay style="padding: 30px">
-        <source id="source" src="">
+<body>
+    <video controls autoplay playsinline>
+        <source type="video/mp4" id="source" src="">
     </video>
 
     <back-btn></back-btn>
+
 </body>
 
 </html>

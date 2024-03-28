@@ -1,0 +1,11 @@
+body{
+    margin: 0;
+    display: grid;
+    place-items: center;
+    
+    overflow: hidden;
+}
+
+video{
+    width: 100%;
+}

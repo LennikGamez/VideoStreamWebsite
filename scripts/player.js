@@ -46,17 +46,19 @@ function loadSubtitleTracks(subtitles){
 
 
 
+window.addEventListener('load', (event) => {
+    
+    fetchSubtitles();
+    
+    if (!season){
+        document.getElementById("source").src = server+"/movie/"+media+"/"+version;
+    }else{
+        document.getElementById("source").src = server+"/series/"+media+"/"+season+"/"+episode;
+    }
+    
+    document.querySelector('video').load();
+})
 
-
-await fetchSubtitles();
-
-if (!season){
-    document.getElementById("source").src = server+"/movie/"+media+"/"+version;
-}else{
-    document.getElementById("source").src = server+"/series/"+media+"/"+season+"/"+episode;
-}
-
-document.querySelector('video').load();
 
 
 
