@@ -78,8 +78,10 @@ function toggleFullscreenView(){
     fullscreenState = !fullscreenState;
     if (fullscreenState){
         video.classList.add('fullscreen');
+        document.querySelector('body').style.overflow = 'hidden';
     }else{
         video.classList.remove('fullscreen');
+        document.querySelector('body').style.overflow = 'auto';
     }
 }
 
