@@ -83,7 +83,11 @@ window.addEventListener('keyup', (event) => {
     elements[selectedIndex].focus();
 
 })
-
+versions.addEventListener('keydown', (event) => {
+    if (event.key !== 'Enter'){
+        event.preventDefault();
+    }
+})
 
 
 loadData();
