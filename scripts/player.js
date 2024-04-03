@@ -71,6 +71,10 @@ window.addEventListener('load', (event) => {
         }
     })
     video.focus();
+    video.addEventListener('focusout', (event) => {
+        video.focus();
+    })
+    
 })
 
 function toggleFullscreenView(){
@@ -81,11 +85,6 @@ function toggleFullscreenView(){
         document.exitFullscreen();
     }
 }
-
-video.addEventListener('focusout', (event) => {
-    video.focus();
-})
-
 
 
 
