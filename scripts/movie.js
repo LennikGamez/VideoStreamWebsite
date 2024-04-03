@@ -16,7 +16,7 @@ const urlParams = new URLSearchParams(queryString);
 
 const media = urlParams.get('media');
 
-let selectedIndex = 0;
+let selectedIndex = -1;
 
 
 function play(){
