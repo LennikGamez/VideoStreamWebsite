@@ -2,6 +2,9 @@ body{
     background-color: rgb(34, 34, 34);
     margin: 0;
 }
+html{
+    overscroll-behavior: none;
+}
 
 nav{
     display: grid;
@@ -10,6 +13,7 @@ nav{
     position: -webkit-sticky;
     top: 0px;
     z-index: 10;
+    margin: 10px;
 }
 
 #search-bar{
@@ -42,4 +46,7 @@ main{
 
     gap: 10px;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+::-webkit-scrollbar{
+    display: none;
 }
