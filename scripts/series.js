@@ -8,7 +8,7 @@ const title = document.getElementById('title');
 const descr = document.getElementById('description');
 const play_btn = document.getElementById('play-btn');
 
-
+let selectedIndex = -1;
 
 function play(){
     window.location.href = "../views/player.html"+"?media="+urlParams.get('media')+"&s=1&e=0";
@@ -48,8 +48,22 @@ function handleData(media){
             const description = ep['description'];
             addEpisodeToPage(i+1, name, description, season);
         }
-    })
+    });
 
+    window.addEventListener('keyup', (event) => {
+        const elements = document.querySelectorAll('.focusable');
+        if (event.key === 'ArrowUp'){
+            selectedIndex = (selectedIndex - 1 + elements.length) % elements.length;
+        }
+        if (event.key === 'ArrowDown'){
+            selectedIndex = (selectedIndex + 1) % elements.length;
+        }
+        elements[selectedIndex].focus();
+        
+        if(event.key === 'Enter'){
+            elements[selectedIndex].click();
+        }
+    });
 
 }
 
@@ -57,7 +71,8 @@ function handleData(media){
 function addEpisodeToPage(index, name, description, season){
     const episode = document.createElement('episode-component');
     episode.setData(index, name, description, season);
-
+    episode.classList.add('focusable');
+    episode.setAttribute('tabindex', '0');
     document.getElementById('episodes').appendChild(episode);
 }
 

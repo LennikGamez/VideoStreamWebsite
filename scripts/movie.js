@@ -16,6 +16,8 @@ const urlParams = new URLSearchParams(queryString);
 
 const media = urlParams.get('media');
 
+let selectedIndex = 0;
+
 
 function play(){
     window.location.href = "../views/player.html"+"?media="+media+"&v="+versions.value;
@@ -69,6 +71,18 @@ function addVersions(data){
     }
 
 }
+
+window.addEventListener('keyup', (event) => {
+    const elements = document.querySelectorAll('.focusable');
+    if (event.key === 'ArrowUp'){
+        selectedIndex = (selectedIndex - 1 + elements.length) % elements.length;
+    }
+    if (event.key === 'ArrowDown'){
+        selectedIndex = (selectedIndex + 1) % elements.length;
+    }
+    elements[selectedIndex].focus();
+
+})
 
 
 
