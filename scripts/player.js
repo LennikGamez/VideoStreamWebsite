@@ -77,11 +77,9 @@ window.addEventListener('load', (event) => {
 function toggleFullscreenView(){
     fullscreenState = !fullscreenState;
     if (fullscreenState){
-        video.classList.add('fullscreen');
-        document.querySelector('body').style.overflow = 'hidden';
+        video.requestFullscreen();
     }else{
-        video.classList.remove('fullscreen');
-        document.querySelector('body').style.overflow = 'auto';
+        document.exitFullscreen();
     }
 }
 
