@@ -19,7 +19,7 @@ function defineEpisode(html){
 
             this.wrapper = shadowRoot.querySelector(".wrapper");
 
-            this.wrapper.addEventListener('click', (event)=>{
+            this.addEventListener('click', (event)=>{
                 const queryString = window.location.search;
                 const urlParams = new URLSearchParams(queryString);
                 

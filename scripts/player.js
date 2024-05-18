@@ -70,21 +70,21 @@ window.addEventListener('load', (event) => {
             toggleFullscreenView();
         }
     })
+    video.focus();
+    video.addEventListener('focusout', (event) => {
+        video.focus();
+    })
     
-
 })
 
 function toggleFullscreenView(){
     fullscreenState = !fullscreenState;
     if (fullscreenState){
-        video.classList.add('fullscreen');
-        document.querySelector('body').style.overflow = 'hidden';
+        video.requestFullscreen();
     }else{
-        video.classList.remove('fullscreen');
-        document.querySelector('body').style.overflow = 'auto';
+        document.exitFullscreen();
     }
 }
-
 
 
 
