@@ -108,6 +108,9 @@ button:hover{
         width: 95%;
         grid-column-start: 2;
         text-align: center;
+        max-height: 100%;
+        overflow-y: scroll;
+        overflow-x: hidden;
     }
     #buttons{
         width: 100%;
