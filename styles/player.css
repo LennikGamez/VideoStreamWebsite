@@ -2,9 +2,11 @@ body{
     margin: 0;
     display: grid;
     place-items: center;
+    height: 100%;
 }
 html{
     overscroll-behavior: none;
+    height: 100%;
 }
 
 /* small */
