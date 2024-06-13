@@ -16,11 +16,6 @@ button:hover{
     cursor: pointer;
 }
 
-
-/* #poster{
-    width: 100%;
-} */
-
 #title{
     margin: 5px;
     margin-top: 15px;
@@ -101,12 +96,6 @@ button:hover{
         place-items: center;
         column-gap: 10px;
     }
-    #poster{
-        max-width: 100%;
-        width: 100%;
-        object-fit: contain;
-        grid-column-start: 1;;
-    }
     #details{
         width: 95%;
         grid-column-start: 2;
@@ -132,10 +121,6 @@ button:hover{
         grid-template-rows: 1fr;
         place-items: center;
         column-gap: 10px;
-    }
-
-    #poster{
-        width: 100%;
     }
 
     #details{

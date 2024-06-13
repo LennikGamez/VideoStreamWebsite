@@ -3,7 +3,7 @@ import {server} from "../scripts/serverip.js";
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 
-const poster = document.getElementById('poster');
+const player = document.querySelector('player-component');
 const title = document.getElementById('title');
 const descr = document.getElementById('description');
 const play_btn = document.getElementById('play-btn');
@@ -11,7 +11,7 @@ const play_btn = document.getElementById('play-btn');
 let selectedIndex = -1;
 
 function play(){
-    window.location.href = "../views/player.html"+"?media="+urlParams.get('media')+"&s=1&e=0";
+    player.play(server+"/series/"+urlParams.get('media')+"/1/0");
 
 }
 
@@ -54,23 +54,31 @@ function handleData(media){
         const elements = document.querySelectorAll('.focusable');
         if (event.key === 'ArrowUp'){
             selectedIndex = (selectedIndex - 1 + elements.length) % elements.length;
+            elements[selectedIndex].focus();
+            
         }
         if (event.key === 'ArrowDown'){
             selectedIndex = (selectedIndex + 1) % elements.length;
+            elements[selectedIndex].focus();
+            
         }
-        elements[selectedIndex].focus();
-        
+
+        if (event.key === '0'){
+            player.toggleFullscreenView();
+        }
+            
         if(event.key === 'Enter'){
             elements[selectedIndex].click();
         }
+        
     });
-
 }
 
 
 function addEpisodeToPage(index, name, description, season){
     const episode = document.createElement('episode-component');
-    episode.setData(index, name, description, season);
+    episode.setPlayer(player);
+    episode.setData(index, urlParams.get('media'), name, description, season);
     episode.classList.add('focusable');
     episode.setAttribute('tabindex', '0');
     document.getElementById('episodes').appendChild(episode);
@@ -80,7 +88,7 @@ function addEpisodeToPage(index, name, description, season){
 function setBasicInformation(json){
     const media = urlParams.get('media');
     const data = json[media];
-    poster.src = server+"/poster/"+media;
+    player.setAttribute('poster-src', server+"/poster/"+media);
     title.innerHTML = data['name'];
     document.title = data['name'];
     descr.innerHTML = data['description'];

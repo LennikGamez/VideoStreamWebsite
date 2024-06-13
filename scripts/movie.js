@@ -2,8 +2,7 @@ import {server} from "../scripts/serverip.js";
 
 
 
-
-const poster = document.getElementById('poster');
+const player = document.querySelector('player-component');
 const title = document.getElementById('title');
 const length = document.getElementById('duration');
 const descr = document.getElementById('description');
@@ -20,7 +19,8 @@ let selectedIndex = -1;
 
 
 function play(){
-    window.location.href = "../views/player.html"+"?media="+media+"&v="+versions.value;
+    // window.location.href = "../views/player.html"+"?media="+media+"&v="+versions.value;
+    player.play(server+"/movie/"+media+"/"+versions.value);
 }
 
 
@@ -47,7 +47,7 @@ function loadData(){
 
 function handleData(json){
     const data = json[media];
-    poster.src = server+"/poster/"+media;
+    player.setAttribute('poster-src', server+"/poster/"+media);
     title.innerHTML = data['name'];
     length.innerHTML = data['length'];
     document.title = data['name'];
@@ -80,7 +80,10 @@ window.addEventListener('keyup', (event) => {
     if (event.key === 'ArrowDown'){
         selectedIndex = (selectedIndex + 1) % elements.length;
     }
-    elements[selectedIndex].focus();
+
+    if (event.key === '0'){
+        player.toggleFullscreenView();
+    }
 
 })
 versions.addEventListener('keydown', (event) => {

@@ -1,3 +1,4 @@
+import { server } from "../../scripts/serverip.js";
 
 
 fetch("../components/episode/episode.html")
@@ -20,15 +21,17 @@ function defineEpisode(html){
             this.wrapper = shadowRoot.querySelector(".wrapper");
 
             this.addEventListener('click', (event)=>{
-                const queryString = window.location.search;
-                const urlParams = new URLSearchParams(queryString);
-                
-                const e = Number(this.index) - 1;
-                window.location.href = "../views/player.html"+"?media="+urlParams.get('media')+"&s="+this.season+"&e="+e;
+                this.playOnPlayer();
             })
 
         }
-        setData(index, name, descr, season){
+
+        setPlayer(player){
+            this.player = player;
+        }
+
+        setData(index, show, name, descr, season){
+            this.show = show;
             this.index = index;
             this.name = name;
             this.description = descr;
@@ -39,6 +42,11 @@ function defineEpisode(html){
             this.shadowRoot.querySelector('.description').innerHTML = this.description;
 
 
+        }
+
+        playOnPlayer(){
+            const e = Number(this.index) - 1;
+            this.player.play(server+"/series/"+this.show+"/"+this.season+"/"+e+"/");
         }
 
     }
