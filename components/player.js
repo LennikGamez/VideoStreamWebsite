@@ -74,6 +74,7 @@ class Player extends HTMLElement{
         this.video.load();
         this.shadowRoot.querySelector('img').style.display = 'none';
         this.video.style.display = 'block';
+        this.scrollIntoView();
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
