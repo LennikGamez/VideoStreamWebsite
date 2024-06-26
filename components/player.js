@@ -6,6 +6,7 @@ class Player extends HTMLElement{
 
     constructor(){
         super();
+        this.videoStepSize = 5;
         this.fullscreenState = false;
         this.attachShadow({mode:"open"});
         
@@ -89,6 +90,18 @@ class Player extends HTMLElement{
                     break;
             }
         });
+
+        document.addEventListener('keydown', (event)=>{
+            console.log(event);
+            if (event.key === 'ArrowRight'){
+                console.log("press");
+                this.video.currentTime += this.videoStepSize;
+            }
+            if (event.key === 'ArrowLeft'){
+                this.video.currentTime -= this.videoStepSize;;
+                
+            }
+        })
     }
 
     toggleVideoPlayPause(){
