@@ -119,6 +119,10 @@ class Player extends HTMLElement{
                 
             }
 
+            embed{
+                pointer-events: none;
+            }
+
             .fullscreen-wrapper{
                 display: none;
                 width: 100%;
@@ -136,6 +140,7 @@ class Player extends HTMLElement{
                 opacity: 0;
                 pointer-events:  none;
             }
+
             .controls{
                 transition: opacity var(--hover-fade-time) ease-in-out;
                 position: absolute;
@@ -156,7 +161,11 @@ class Player extends HTMLElement{
                 border-style: none;
                 outline: none;
                 color: white;
-                padding: 0;
+                padding: 0px;        
+            }
+            .control-element:hover{
+                cursor: pointer;
+                opacity: .5;
             }
 
             video{
