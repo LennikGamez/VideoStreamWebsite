@@ -80,11 +80,6 @@ window.addEventListener('keyup', (event) => {
     if (event.key === 'ArrowDown'){
         selectedIndex = (selectedIndex + 1) % elements.length;
     }
-
-    if (event.key === '0'){
-        player.toggleFullscreenView();
-    }
-
 })
 versions.addEventListener('keydown', (event) => {
     if (event.key !== 'Enter'){
