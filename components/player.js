@@ -20,9 +20,16 @@ class Player extends HTMLElement{
 
         this.video = this.shadowRoot.querySelector('video');
         this.videoContainer = this.shadowRoot.querySelector('.video-container');
+        this.currentTimeSpan = this.shadowRoot.querySelector('.current-time');
+        this.durationSpan = this.shadowRoot.querySelector('.total-time');
 
 
         this.setupControls();
+    }
+
+    formatTime(time){
+        if (isNaN(time)) return this.formatTime(0);
+        return new Date(time * 1000).toISOString().substr(14, 5);
     }
 
     setupControls(){
@@ -59,6 +66,7 @@ class Player extends HTMLElement{
             if(!this.timelineDrag) return;
             this.timelineDrag = false;
             this.video.play();
+            this.setTimelineByMouseEvent(e);
         })
         document.addEventListener('touchend', (e)=>{
             if(!this.timelineDrag) return;
@@ -89,6 +97,9 @@ class Player extends HTMLElement{
     updateTimeline(){
         const percent = (this.video.currentTime / this.video.duration);
         this.style.setProperty('--progress', percent);
+
+        this.currentTimeSpan.innerHTML = this.formatTime(this.video.currentTime);
+        this.durationSpan.innerHTML = this.formatTime(this.video.duration);
     }
 
     keyboardControls(){
@@ -205,6 +216,11 @@ class Player extends HTMLElement{
                                 <svg class="play-icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M320-200v-560l440 280-440 280Zm80-280Zm0 134 210-134-210-134v268Z"/></svg>
                                 <svg class="pause-icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M520-200v-560h240v560H520Zm-320 0v-560h240v560H200Zm400-80h80v-400h-80v400Zm-320 0h80v-400h-80v400Zm0-400v400-400Zm320 0v400-400Z"/></svg>
                             </button>
+                            <div class"time-display">
+                                <span class="current-time">0:00</span>
+                                /
+                                <span class="total-time">0:00</span>
+                            </div>
                         </div>
                         <div class="right-controls">
                             <button class="control-element sub"><embed src="../assets/control-icons/subtitles.svg"></button>
@@ -312,6 +328,18 @@ class Player extends HTMLElement{
                 justify-content: space-between;
                 align-items: center;
             }
+
+            .left-controls,
+            right-controls{
+                display: flex;
+                gap: 5px;
+                align-items: center;
+            }
+            .time-display{
+                display: flex;
+                align-items: center;
+            }
+
 
             .control-element{
                 background-color: transparent;
