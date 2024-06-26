@@ -94,7 +94,9 @@ class Player extends HTMLElement{
             <img src="" alt="poster">
             <div class="fullscreen-wrapper">
                 <div class="controls">
-                    <button id="fullscreen-btn" class="btn focusable">Fullscreen</button>
+                    <button class="control-element"><embed src="../assets/control-icons/play.svg"></button>
+                    <button class="control-element"><embed src="../assets/control-icons/subtitles.svg"></button>
+                    <button class="control-element"><embed src="../assets/control-icons/fullscreen.svg"></button>
                 </div>
                 <video autoplay>
                     <source id="source" src="">
@@ -127,6 +129,14 @@ class Player extends HTMLElement{
                 height: 100%;
                 justify-content: center;
                 align-content: flex-end;
+            }
+
+            .control-element{
+                background-color: transparent;
+                border-style: none;
+                outline: none;
+                color: white;
+                padding: 0;
             }
 
             video{
