@@ -148,8 +148,10 @@ class Player extends HTMLElement{
 
         this.fullscreenState = !this.fullscreenState;
         if (this.fullscreenState){
+            this.videoContainer.classList.add('fullscreen');
             this.videoContainer.requestFullscreen();
         }else{
+            this.videoContainer.classList.remove('fullscreen');
             document.exitFullscreen();
         }
     }
@@ -160,7 +162,7 @@ class Player extends HTMLElement{
         this.setAttribute("video-src", url);
         this.video.load();
         this.shadowRoot.querySelector('img').style.display = 'none';
-        this.videoContainer.style.display = 'block';
+        this.videoContainer.classList.remove('hidden');
         this.scrollIntoView();
     }
 
@@ -178,7 +180,7 @@ class Player extends HTMLElement{
     html(){
         return /*html*/`
             <img src="" alt="poster">
-            <div class="video-container">
+            <div class="video-container hidden">
                 <div class="video-controls-container">
                     <div class="timeline-container">
                         <div class="timeline">
@@ -227,10 +229,12 @@ class Player extends HTMLElement{
             }
 
             .video-container{
-                display: none;
                 width: 100%;
                 height: fit-content;
                 position: relative;
+            }
+            .hidden{
+                display: none;
             }
             .video-container::before{
                 transition: opacity var(--hover-fade-time) ease-in-out;
@@ -245,6 +249,16 @@ class Player extends HTMLElement{
                 z-index: 99;
             }
 
+            .video-container.fullscreen{
+                display: flex;
+                justify-content: center;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: black;
+            }
 
             .video-container:hover .video-controls-container,
             .video-container:hover:before{
@@ -345,8 +359,12 @@ class Player extends HTMLElement{
                 max-width: 100%;
                 width: 100%;
                 object-fit: contain;
-                box-sizing: border-box;
             }
+            .video-container.fullscreen video{
+                height: 100%;
+                width: auto;;
+            }
+
             img{
                 max-width: 100%;
                 width: 100%;
