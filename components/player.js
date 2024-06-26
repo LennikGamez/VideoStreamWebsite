@@ -59,13 +59,11 @@ class Player extends HTMLElement{
             if(!this.timelineDrag) return;
             this.timelineDrag = false;
             this.video.play();
-            this.setTimelineByMouseEvent(e);
         })
         document.addEventListener('touchend', (e)=>{
             if(!this.timelineDrag) return;
             this.timelineDrag = false;
             this.video.play();
-            this.setTimelineByMouseEvent(e.touches[0]);
         })
 
         document.addEventListener('mousemove', (event)=>{
