@@ -18,6 +18,7 @@ class Player extends HTMLElement{
         this.shadowRoot.appendChild(style);
 
         this.video = this.shadowRoot.querySelector('video');
+        this.fullscreenWrapper = this.shadowRoot.querySelector('.fullscreen-wrapper');
     }
 
 
@@ -73,7 +74,7 @@ class Player extends HTMLElement{
         this.setAttribute("video-src", url);
         this.video.load();
         this.shadowRoot.querySelector('img').style.display = 'none';
-        this.video.style.display = 'block';
+        this.fullscreenWrapper.style.display = 'block';
         this.scrollIntoView();
     }
 
@@ -91,9 +92,14 @@ class Player extends HTMLElement{
     html(){
         return /*html*/`
             <img src="" alt="poster">
-            <video controls autoplay>
-                <source id="source" src="">
-            </video>
+            <div class="fullscreen-wrapper">
+                <div class="controls">
+                    <button id="fullscreen-btn" class="btn focusable">Fullscreen</button>
+                </div>
+                <video autoplay>
+                    <source id="source" src="">
+                </video>
+            </div>
         `;
     }
 
@@ -109,8 +115,21 @@ class Player extends HTMLElement{
                 height: 100%;
                 
             }
-            video{
+
+            .fullscreen-wrapper{
                 display: none;
+                width: 100%;
+                position: relative;
+            }
+            .controls{
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                justify-content: center;
+                align-content: flex-end;
+            }
+
+            video{
                 max-width: 100%;
                 width: 100%;
                 object-fit: contain;
