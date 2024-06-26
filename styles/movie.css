@@ -1,4 +1,7 @@
-html{height: 100%;}
+html{
+    height: 100%;
+    overscroll-behavior: none;
+}
 body{
     color: white;
     margin: 0;
@@ -12,11 +15,6 @@ button{
 button:hover{
     cursor: pointer;
 }
-
-
-/* #poster{
-    width: 100%;
-} */
 
 #title{
     margin: 5px;
@@ -98,16 +96,13 @@ button:hover{
         place-items: center;
         column-gap: 10px;
     }
-    #poster{
-        max-width: 100%;
-        width: 100%;
-        object-fit: contain;
-        grid-column-start: 1;;
-    }
     #details{
         width: 95%;
         grid-column-start: 2;
         text-align: center;
+        max-height: 100%;
+        overflow-y: scroll;
+        overflow-x: hidden;
     }
     #buttons{
         width: 100%;
@@ -126,10 +121,6 @@ button:hover{
         grid-template-rows: 1fr;
         place-items: center;
         column-gap: 10px;
-    }
-
-    #poster{
-        width: 100%;
     }
 
     #details{

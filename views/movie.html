@@ -5,13 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie</title>
     <script type="module" src="../scripts/movie.js" defer></script>
-    <script type="module" src="../components/back_button/back_btn.js" defer></script>
+    <script type="module" src="../components/back_btn.js" defer></script>
+    <script type="module" src="../components/player.js" defer></script>
     <link rel="stylesheet" href="../styles/movie.css">
     <link rel="manifest" href="../manifest.webmanifest">
+    <link rel="stylesheet" href="../styles/font.css">
+    <link rel="icon" type="image/png" href="../MediaBaseIcon.png">
 
 </head>
 <body>
-        <img id="poster" src="http://192.168.178.83:8000/poster/jim knopf und lukas" alt="poster">
+        <!-- <img id="poster" src="http://192.168.178.83:8000/poster/jim knopf und lukas" alt="poster"> -->
+        <player-component video-src = "" poster-src = ""></player-component>
         <div id="details">
             <h1 id="title">S.W.A.T</h1>
             <p id="duration">1:30h</p>

@@ -4,15 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Series</title>
-    <script src="../components/episode/episode.js"></script>
+    <script src="../components/episode.js" type="module"></script>
     <script type="module" src="../scripts/series.js" defer></script>
-    <script type="module" src="../components/back_button/back_btn.js" defer"></script>
+    <script type="module" src="../components/back_btn.js" defer"></script>
+    <script src="../components/player.js" type="module" defer></script>
     <link rel="stylesheet" href="../styles/movie.css">
     <link rel="manifest" href="../manifest.webmanifest">
+    <link rel="stylesheet" href="../styles/font.css">
+    <link rel="icon" type="image/png" href="../MediaBaseIcon.png">
 
 </head>
 <body>
-    <img id="poster" src="http://xxx.xxx.xxx.xxx:xxxx/poster/jim knopf und lukas" alt="poster">
+    <player-component></player-component>
     <div id="details">
         <h1 id="title">S.W.A.T</h1>
         <p id="description">Description</p>
