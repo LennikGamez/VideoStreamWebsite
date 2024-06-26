@@ -109,6 +109,7 @@ class Player extends HTMLElement{
 
         return /*css*/`
             :host{
+                --hover-fade-time: .3s;
                 display: flex;
                 position: relative;
                 justify-content: center;
@@ -121,14 +122,33 @@ class Player extends HTMLElement{
             .fullscreen-wrapper{
                 display: none;
                 width: 100%;
+                height: fit-content;
                 position: relative;
             }
-            .controls{
+            .fullscreen-wrapper::before{
+                transition: opacity var(--hover-fade-time) ease-in-out;
+                content: '';
                 position: absolute;
+                bottom: 0;
+                background: linear-gradient(to top, rgba(0, 0, 0, .75), transparent);
                 width: 100%;
-                height: 100%;
-                justify-content: center;
-                align-content: flex-end;
+                aspect-ratio: 6/1;
+                opacity: 0;
+                pointer-events:  none;
+            }
+            .controls{
+                transition: opacity var(--hover-fade-time) ease-in-out;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: 100;
+                opacity: 0;
+            }
+
+            .fullscreen-wrapper:hover .controls,
+            .fullscreen-wrapper:hover:before{
+                opacity: 1;
             }
 
             .control-element{
@@ -140,9 +160,11 @@ class Player extends HTMLElement{
             }
 
             video{
+                display: flex;
                 max-width: 100%;
                 width: 100%;
                 object-fit: contain;
+                box-sizing: border-box;
             }
             img{
                 max-width: 100%;
