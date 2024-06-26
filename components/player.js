@@ -50,16 +50,26 @@ class Player extends HTMLElement{
             this.timelineDrag = true;
             this.video.pause();
         });
+        timeline.addEventListener('touchstart', ()=>{
+            this.timelineDrag = true;
+            this.video.pause();
+        })
+
         document.addEventListener('mouseup', (e)=>{
             if(!this.timelineDrag) return;
             this.timelineDrag = false;
             this.video.play();
             this.setTimelineByMouseEvent(e);
         })
+        
         document.addEventListener('mousemove', (event)=>{
             if(!this.timelineDrag) return;
             this.setTimelineByMouseEvent(event);
         });
+        document.addEventListener('touchmove', (event)=>{
+            if(!this.timelineDrag) return;;
+            this.setTimelineByMouseEvent(event.touches[0]);
+        })
 
         // keyboard 
         this.keyboardControls();
@@ -67,7 +77,7 @@ class Player extends HTMLElement{
 
     setTimelineByMouseEvent(event){
         const rect = this.shadowRoot.querySelector('.timeline').getBoundingClientRect();
-        var x = event.offsetX - rect.left;
+        var x = event.clientX - rect.left;
         const timeToSeek = (x / rect.width) * this.video.duration;
         this.video.currentTime = timeToSeek;
     }
@@ -92,9 +102,7 @@ class Player extends HTMLElement{
         });
 
         document.addEventListener('keydown', (event)=>{
-            console.log(event);
             if (event.key === 'ArrowRight'){
-                console.log("press");
                 this.video.currentTime += this.videoStepSize;
             }
             if (event.key === 'ArrowLeft'){
