@@ -1,5 +1,6 @@
 
 import { server } from "../scripts/serverip.js";
+import InactivityTimer from "../scripts/inactivity-timer.js";
 
 class Player extends HTMLElement{
     static observedAttributes = ["video-src", "poster-src"];
@@ -20,13 +21,22 @@ class Player extends HTMLElement{
 
         this.video = this.shadowRoot.querySelector('video');
         this.videoContainer = this.shadowRoot.querySelector('.video-container');
+        this.videoPlayer = this.shadowRoot.querySelector('.video-player');
         this.currentTimeSpan = this.shadowRoot.querySelector('.current-time');
         this.durationSpan = this.shadowRoot.querySelector('.total-time');
 
+        this.inactivityTimer = new InactivityTimer(()=>this.hideCursor(), ()=>this.showCursor(), 2000);
 
         this.setupControls();
     }
 
+    hideCursor(){
+        this.videoContainer.classList.add('cursor-none');
+    }
+
+    showCursor(){
+        this.videoContainer.classList.remove('cursor-none');
+    }
     formatTime(time){
         if (isNaN(time)) return this.formatTime(0);
         return new Date(time * 1000).toISOString().substr(14, 5);
@@ -54,31 +64,37 @@ class Player extends HTMLElement{
         // timeline
         this.video.addEventListener('timeupdate', this.updateTimeline.bind(this));;
         timeline.addEventListener('mousedown', ()=>{
+            this.inactivityTimer.restart();
             this.timelineDrag = true;
             this.video.pause();
         });
         timeline.addEventListener('touchstart', ()=>{
+            this.inactivityTimer.restart();
             this.timelineDrag = true;
             this.video.pause();
         })
 
         document.addEventListener('mouseup', (e)=>{
+            this.inactivityTimer.restart();
             if(!this.timelineDrag) return;
             this.timelineDrag = false;
             this.video.play();
             this.setTimelineByMouseEvent(e);
         })
         document.addEventListener('touchend', (e)=>{
+            this.inactivityTimer.restart();
             if(!this.timelineDrag) return;
             this.timelineDrag = false;
             this.video.play();
         })
 
         document.addEventListener('mousemove', (event)=>{
+            this.inactivityTimer.restart();
             if(!this.timelineDrag) return;
             this.setTimelineByMouseEvent(event);
         });
         document.addEventListener('touchmove', (event)=>{
+            this.inactivityTimer.restart();
             if(!this.timelineDrag) return;;
             this.setTimelineByMouseEvent(event.touches[0]);
         })
@@ -171,9 +187,11 @@ class Player extends HTMLElement{
 
         this.fullscreenState = !this.fullscreenState;
         if (this.fullscreenState){
+            this.videoPlayer.classList.add('fullscreen');
             this.videoContainer.classList.add('fullscreen');
-            this.videoContainer.requestFullscreen();
+            this.videoPlayer.requestFullscreen();
         }else{
+            this.videoPlayer.classList.remove('fullscreen');
             this.videoContainer.classList.remove('fullscreen');
             document.exitFullscreen();
         }
@@ -183,6 +201,7 @@ class Player extends HTMLElement{
         this.fetchSubtitles();
 
         this.setAttribute("video-src", url);
+        this.videoContainer.focus();
         this.video.load();
         this.shadowRoot.querySelector('img').style.display = 'none';
         this.videoContainer.classList.remove('hidden');
@@ -202,35 +221,37 @@ class Player extends HTMLElement{
 
     html(){
         return /*html*/`
+            <div class="video-player">
             <img src="" alt="poster">
-            <div class="video-container hidden">
-                <div class="video-controls-container">
-                    <div class="timeline-container">
-                        <div class="timeline">
-                            <div class="thumb-indicator"></div>
-                        </div>
-                    </div>
-                    <div class="controls">
-                        <div class="left-controls">
-                            <button class="control-element play-btn">
-                                <svg class="play-icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M320-200v-560l440 280-440 280Zm80-280Zm0 134 210-134-210-134v268Z"/></svg>
-                                <svg class="pause-icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M520-200v-560h240v560H520Zm-320 0v-560h240v560H200Zm400-80h80v-400h-80v400Zm-320 0h80v-400h-80v400Zm0-400v400-400Zm320 0v400-400Z"/></svg>
-                            </button>
-                            <div class"time-display">
-                                <span class="current-time">0:00</span>
-                                /
-                                <span class="total-time">0:00</span>
+                <div class="video-container hidden">
+                    <div class="video-controls-container">
+                        <div class="timeline-container">
+                            <div class="timeline">
+                                <div class="thumb-indicator"></div>
                             </div>
                         </div>
-                        <div class="right-controls">
-                            <button class="control-element sub"><embed src="../assets/control-icons/subtitles.svg"></button>
-                            <button class="control-element fullscreen-btn"><embed src="../assets/control-icons/fullscreen.svg"></button>
+                        <div class="controls">
+                            <div class="left-controls">
+                                <button class="control-element play-btn">
+                                    <svg class="play-icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M320-200v-560l440 280-440 280Zm80-280Zm0 134 210-134-210-134v268Z"/></svg>
+                                    <svg class="pause-icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M520-200v-560h240v560H520Zm-320 0v-560h240v560H200Zm400-80h80v-400h-80v400Zm-320 0h80v-400h-80v400Zm0-400v400-400Zm320 0v400-400Z"/></svg>
+                                </button>
+                                <div class"time-display">
+                                    <span class="current-time">0:00</span>
+                                    /
+                                    <span class="total-time">0:00</span>
+                                </div>
+                            </div>
+                            <div class="right-controls">
+                                <button class="control-element sub"><embed src="../assets/control-icons/subtitles.svg"></button>
+                                <button class="control-element fullscreen-btn"><embed src="../assets/control-icons/fullscreen.svg"></button>
+                            </div>
                         </div>
                     </div>
+                    <video autoplay playsinline>
+                        <source id="source" src="">
+                    </video>
                 </div>
-                <video autoplay playsinline>
-                    <source id="source" src="">
-                </video>
             </div>
         `;
     }
@@ -255,7 +276,7 @@ class Player extends HTMLElement{
             embed{
                 pointer-events: none;
             }
-
+            .video-player,
             .video-container{
                 width: 100%;
                 height: fit-content;
@@ -277,6 +298,12 @@ class Player extends HTMLElement{
                 z-index: 99;
             }
 
+            .video-container.cursor-none{
+                pointer-events: none;
+            }
+            .video-player:has(.video-container.cursor-none){
+                cursor: none;
+            }
             .video-container.fullscreen{
                 display: flex;
                 justify-content: center;
@@ -288,7 +315,7 @@ class Player extends HTMLElement{
                 background-color: black;
             }
 
-            .video-container:hover .video-controls-container,
+            .video-container:not(.cursor-none) .video-controls-container,
             .video-container:hover:before{
                 opacity: 1;
             }
