@@ -304,7 +304,7 @@ class Player extends HTMLElement{
             .video-player:has(.video-container.cursor-none){
                 cursor: none;
             }
-            .video-container.fullscreen{
+            .fullscreen{
                 display: flex;
                 justify-content: center;
                 position: fixed;
@@ -313,6 +313,7 @@ class Player extends HTMLElement{
                 width: 100%;
                 height: 100%;
                 background-color: black;
+                z-index: 1000;
             }
 
             .video-container:not(.cursor-none) .video-controls-container,
