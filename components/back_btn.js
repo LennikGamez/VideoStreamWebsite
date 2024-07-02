@@ -16,6 +16,9 @@ export default class BackButton extends HTMLElement{
 
     css(){
         this.shadowRoot.innerHTML += "<style>" + /*css*/`
+        :host{
+            z-index: 99;
+        }
         button#exit{
             position: fixed;
             top: 5px;
