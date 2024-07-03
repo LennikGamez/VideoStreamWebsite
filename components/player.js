@@ -317,12 +317,13 @@ class Player extends HTMLElement{
             }
 
             .video-container:not(.cursor-none) .video-controls-container,
-            .video-container:hover:before{
+            .video-container:not(.cursor-none).video-container::before{
                 opacity: 1;
             }
 
             .video-container.paused .video-controls-container,
-            .video-container.paused:before{
+            .video-container.paused:before,
+            .video-container.paused .video-container::before{
                 /* if paused controls are always visible */
                 opacity: 1;
             }
