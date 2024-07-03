@@ -29,10 +29,15 @@ class Player extends HTMLElement{
 
         this.setupControls();
 
-        document.addEventListener('fullscreenchange', ()=>{
-            if(document.fullscreenElement) return;
-            this.exitFullscreen();
-        })
+        document.addEventListener('webkitfullscreenchange', ()=>{this.handleFullscreenChange()});
+        document.addEventListener('mozfullscreenchange', ()=>{this.handleFullscreenChange()});
+        document.addEventListener('msfullscreenchange', ()=>{this.handleFullscreenChange()});
+        document.addEventListener('fullscreenchange', ()=>{this.handleFullscreenChange()});
+    }
+
+    handleFullscreenChange(){
+        if(document.fullscreenElement) return;
+        this.exitFullscreen();
     }
 
     hideCursor(){
@@ -200,8 +205,11 @@ class Player extends HTMLElement{
             else if (this.videoPlayer.webkitEnterFullscreen) this.videoPlayer.webkitEnterFullscreen(); // Magic is here for iOS
 
         }else{
-            document.exitFullscreen();
-           this.exitFullscreen();
+                if(document.exitFullscreen) document.exitFullscreen();
+                else if (this.videoPlayer.webkitCancelFullscreen) this.videoPlayer.webkitCancelFullscreen();
+                else if (this.videoPlayer.mozCancelFullScreen) this.videoPlayer.mozCancelFullScreen(); // Careful 
+                else if (this.videoPlayer.msExitFullscreen) this.videoPlayer.msExitFullscreen();
+                this.exitFullscreen();
         }
     }
 
