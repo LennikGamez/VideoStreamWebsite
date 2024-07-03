@@ -28,6 +28,11 @@ class Player extends HTMLElement{
         this.inactivityTimer = new InactivityTimer(()=>this.hideCursor(), ()=>this.showCursor(), 2000);
 
         this.setupControls();
+
+        document.addEventListener('fullscreenchange', ()=>{
+            if(document.fullscreenElement) return;
+            this.exitFullscreen();
+        })
     }
 
     hideCursor(){
@@ -184,17 +189,26 @@ class Player extends HTMLElement{
         if(!(this.getAttribute("video-src"))){
             return;
         }
-
         this.fullscreenState = !this.fullscreenState;
         if (this.fullscreenState){
             this.videoPlayer.classList.add('fullscreen');
             this.videoContainer.classList.add('fullscreen');
-            this.videoPlayer.requestFullscreen();
+            if (this.videoPlayer.webkitRequestFullscreen) this.videoPlayer.webkitRequestFullscreen();
+            else if(this.videoPlayer.requestFullscreen) this.videoPlayer.requestFullscreen();
+            else if (this.videoPlayer.mozRequestFullScreen) this.videoPlayer.mozRequestFullScreen(); // Careful to the capital S
+            else if (this.videoPlayer.msRequestFullscreen) this.videoPlayer.msRequestFullscreen();
+            else if (this.videoPlayer.webkitEnterFullscreen) this.videoPlayer.webkitEnterFullscreen(); // Magic is here for iOS
+
         }else{
-            this.videoPlayer.classList.remove('fullscreen');
-            this.videoContainer.classList.remove('fullscreen');
             document.exitFullscreen();
+           this.exitFullscreen();
         }
+    }
+
+    exitFullscreen(){
+        this.videoPlayer.classList.remove('fullscreen');
+        this.videoContainer.classList.remove('fullscreen');
+        this.fullscreenState = false;
     }
 
     play(url){
